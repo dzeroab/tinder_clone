@@ -39,7 +39,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 ///
 extension _HomeBloc on HomeBloc {
   Future<void> _loadEvent(_LoadEvent event, Emitter<HomeState> emit) async {
-    await _syncUsersCommand.call();
+    try {
+      await _syncUsersCommand.call();
+    } catch (e) {
+      // handle error
+    }
 
     _getUserListQuery() //
         .map((event) => HomeEvent.usersLoaded(event))
@@ -64,7 +68,8 @@ extension _HomeBloc on HomeBloc {
 
   Future<void> _updateViewIndex(_UpdateViewIndex event, Emitter<HomeState> emit) async {
     final index = event.index >= state.users.length ? 0 : event.index;
-    emit(state.copyWith(viewIndex: event.index));
+
+    emit(state.copyWith(viewIndex: index));
 
     final futures = [_loadUserDetailCommand.call(state.users[index].id)];
     if (index + 1 < state.users.length) {
