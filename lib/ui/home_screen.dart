@@ -26,7 +26,6 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   late final HomeBloc _bloc = GetIt.I();
 
   late final CardAnimationController _cardAnimation = CardAnimationController();
-  SwipeDirection _direction = SwipeDirection.startToEnd;
 
   @override
   void initState() {
@@ -34,11 +33,11 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     _bloc.load();
 
     _cardAnimation.initialize(this, () {
-      switch (_direction) {
-        case SwipeDirection.startToEnd:
+      switch (_cardAnimation.emotionAction) {
+        case UserEmotionAction.like:
           _bloc.next(UserActionState.liked);
           break;
-        case SwipeDirection.endToStart:
+        case UserEmotionAction.pass:
           _bloc.next(UserActionState.passed);
           break;
       }
@@ -53,17 +52,18 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   }
 
   void _onPass() {
-    _direction = SwipeDirection.endToStart;
+    _cardAnimation.emotionAction = UserEmotionAction.pass;
     _cardAnimation.controller.forward();
   }
 
   void _onLike() {
-    _direction = SwipeDirection.startToEnd;
+    _cardAnimation.emotionAction = UserEmotionAction.like;
     _cardAnimation.controller.forward();
   }
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SafeArea(
         child: BlocBuilder<HomeBloc, HomeState>(
@@ -86,66 +86,69 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   const _SearchView(),
                   const SizedBox(height: 16),
                   Expanded(
-                    child: AnimatedBuilder(
-                      animation: _cardAnimation.controller,
-                      builder: (context, child) {
-                        return Stack(
-                          children: [
-                            for (var i = shownLenghth - 1; i >= 0; i--)
-                              _PositionProfileCard(
-                                user: shownUsers[i],
-                                index: i,
-                                cardAnimationController: _cardAnimation,
-                                right: i == 0 ? _cardAnimation.getRight(_direction) : null,
-                                left: i == 0 ? _cardAnimation.getLeft(_direction) : null,
-                                rotateAngle: i == 0 ? _cardAnimation.getRotateAngle(_direction) : 0,
-                              ),
+                    child: GestureDetector(
+                      onHorizontalDragDown: (details) => _cardAnimation.onDragDown(details),
+                      onHorizontalDragUpdate: (details) => _cardAnimation.onDragUpdate(width, details),
+                      onHorizontalDragEnd: (details) => _cardAnimation.onDragEnd(details),
+                      child: AnimatedBuilder(
+                        animation: _cardAnimation.controller,
+                        builder: (context, child) {
+                          return Stack(
+                            children: [
+                              for (var i = shownLenghth - 1; i >= 0; i--)
+                                _PositionProfileCard(
+                                  user: shownUsers[i],
+                                  index: i,
+                                  cardAnimationController: _cardAnimation,
+                                  // i=0, it means the top card
+                                  right: i == 0 ? _cardAnimation.getRight(width) : null,
+                                  left: i == 0 ? _cardAnimation.getLeft(width) : null,
+                                  rotateAngle: i == 0 ? _cardAnimation.getRotateAngle() : 0,
+                                ),
 
-                            ///
-                            Positioned(
-                              child: _ActionButtonGroup(onLike: _onLike, onPass: _onPass),
-                              left: 0,
-                              right: 0,
-                              bottom: 0,
-                            ),
-                          ],
-                        );
-                      },
+                              ///
+                              Positioned(
+                                child: _ActionButtonGroup(onLike: _onLike, onPass: _onPass),
+                                left: 0,
+                                right: 0,
+                                bottom: 0,
+                              ),
+                            ],
+                          );
+                        },
+                      ),
                     ),
                   ),
 
                   ///
-                  Container(
-                    height: 60,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => const UserListScreen(actionState: UserActionState.passed)));
-                            },
-                            child: Container(
-                              child: const Text("Passed List"),
-                              height: 60,
-                              alignment: Alignment.center,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                            child: InkWell(
+                  Row(
+                    children: [
+                      Expanded(
+                        child: InkWell(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const UserListScreen(actionState: UserActionState.liked)));
+                                builder: (context) => const UserListScreen(actionState: UserActionState.passed)));
                           },
                           child: Container(
-                            child: const Text("Linked List", style: TextStyle(color: Colors.red)),
+                            child: const Text("Passed List"),
                             height: 60,
                             alignment: Alignment.center,
                           ),
-                        )),
-                      ],
-                    ),
+                        ),
+                      ),
+                      Expanded(
+                          child: InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const UserListScreen(actionState: UserActionState.liked)));
+                        },
+                        child: Container(
+                          child: const Text("Linked List", style: TextStyle(color: Colors.red)),
+                          height: 60,
+                          alignment: Alignment.center,
+                        ),
+                      )),
+                    ],
                   )
                 ],
               ),
@@ -177,16 +180,12 @@ class _PositionProfileCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      child: Dismissible(
-        key: Key(user.id),
-        direction: DismissDirection.horizontal,
-        child: Transform.rotate(
-          angle: rotateAngle,
-          child: ProfileCard(
-            name: "${user.firstName} ${user.lastName}",
-            picture: user.picture,
-            age: user.age,
-          ),
+      child: Transform.rotate(
+        angle: rotateAngle,
+        child: ProfileCard(
+          name: "${user.firstName} ${user.lastName}",
+          picture: user.picture,
+          age: user.age,
         ),
       ),
       top: 0,

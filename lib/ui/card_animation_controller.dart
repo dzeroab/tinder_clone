@@ -1,9 +1,10 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-enum SwipeDirection {
-  startToEnd,
-  endToStart,
+import 'package:flutter/material.dart';
+
+enum UserEmotionAction {
+  like,
+  pass,
 }
 
 abstract class CardAnimationController {
@@ -11,13 +12,19 @@ abstract class CardAnimationController {
 
   AnimationController get controller;
 
-  Animation<double> get offset;
-
   Animation<double> get rotateAngle;
+
+  late UserEmotionAction emotionAction;
 
   void initialize(TickerProvider vsync, VoidCallback onDone);
 
   void dispose();
+
+  void onDragDown(DragDownDetails details);
+
+  void onDragUpdate(double screenWidth, DragUpdateDetails details);
+
+  void onDragEnd(DragEndDetails details);
 }
 
 ///
@@ -25,13 +32,16 @@ class _CardAnimationControllerImpl implements CardAnimationController {
   @override
   late final AnimationController controller;
   @override
-  late final Animation<double> offset;
-  @override
   late final Animation<double> rotateAngle;
 
   @override
+  UserEmotionAction emotionAction = UserEmotionAction.like;
+
+  double _dragStartX = 0;
+
+  @override
   void initialize(TickerProvider vsync, VoidCallback onDone) {
-    controller = AnimationController(duration: const Duration(milliseconds: 600), vsync: vsync);
+    controller = AnimationController(duration: const Duration(milliseconds: 400), vsync: vsync);
 
     controller.addListener(() {
       if (controller.isCompleted) {
@@ -39,11 +49,6 @@ class _CardAnimationControllerImpl implements CardAnimationController {
         controller.reset();
       }
     });
-
-    offset = Tween<double>(
-      begin: 0,
-      end: 420.0,
-    ).animate(CurvedAnimation(parent: controller, curve: Curves.ease));
 
     rotateAngle = Tween<double>(
       begin: 0,
@@ -55,27 +60,49 @@ class _CardAnimationControllerImpl implements CardAnimationController {
   void dispose() {
     controller.dispose();
   }
+
+  @override
+  void onDragDown(DragDownDetails details) {
+    _dragStartX = details.globalPosition.dx;
+  }
+
+  @override
+  void onDragUpdate(double screenWidth, DragUpdateDetails details) {
+    final dragPercentage = (details.globalPosition.dx - _dragStartX) / screenWidth;
+    controller.value = dragPercentage < 0 ? dragPercentage * -1 : dragPercentage;
+
+    emotionAction = dragPercentage < 0 ? UserEmotionAction.pass : UserEmotionAction.like;
+  }
+
+  @override
+  void onDragEnd(DragEndDetails details) {
+    if (controller.value > 0.35) {
+      controller.forward();
+    } else {
+      controller.reverse();
+    }
+  }
 }
 
 extension CardAnimationControllerEx on CardAnimationController {
-  double _getHorizontalSign(SwipeDirection direction) {
-    switch (direction) {
-      case SwipeDirection.startToEnd:
+  double _getHorizontalSign(UserEmotionAction action) {
+    switch (action) {
+      case UserEmotionAction.like:
         return 1;
-      case SwipeDirection.endToStart:
+      case UserEmotionAction.pass:
         return -1;
     }
   }
 
-  double getLeft(SwipeDirection direction) {
-    return offset.value * _getHorizontalSign(direction);
+  double getLeft(double screenWidth) {
+    return screenWidth * controller.value * _getHorizontalSign(emotionAction);
   }
 
-  double getRight(SwipeDirection direction) {
-    return offset.value * _getHorizontalSign(direction) * -1;
+  double getRight(double screenWidth) {
+    return screenWidth * controller.value * _getHorizontalSign(emotionAction) * -1;
   }
 
-  double getRotateAngle(SwipeDirection direction) {
-    return rotateAngle.value * _getHorizontalSign(direction);
+  double getRotateAngle() {
+    return rotateAngle.value * _getHorizontalSign(emotionAction);
   }
 }
