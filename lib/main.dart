@@ -19,8 +19,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Tinder Clone',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.light(),
-      home: HomeScreen(),
+      theme: _buildTheme(ThemeData.light()),
+      home: const HomeScreen(),
     );
   }
+}
+
+ThemeData _buildTheme(ThemeData base) {
+  return base.copyWith(scaffoldBackgroundColor: const Color(0xffF4F5F5));
 }

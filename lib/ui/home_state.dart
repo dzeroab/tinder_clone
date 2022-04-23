@@ -3,19 +3,15 @@ part of 'home_bloc.dart';
 @freezed
 class HomeState with _$HomeState {
   const factory HomeState({
-    required HomeBottomTab tab,
     required List<User> users,
     required bool isLoading,
+    required int viewIndex,
   }) = _HomeState;
 
   factory HomeState.initial() => const HomeState(
-        tab: HomeBottomTab.user,
         users: [],
         isLoading: true,
+        viewIndex: 0,
       );
 }
 
-enum HomeBottomTab {
-  user,
-  reviewList,
-}

@@ -20,6 +20,12 @@ class _$HomeEventTearOff {
   _LoadEvent load() {
     return const _LoadEvent();
   }
+
+  _UsersLoadedEvent usersLoaded(List<User> users) {
+    return _UsersLoadedEvent(
+      users,
+    );
+  }
 }
 
 /// @nodoc
@@ -30,32 +36,38 @@ mixin _$HomeEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() load,
+    required TResult Function(List<User> users) usersLoaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? load,
+    TResult Function(List<User> users)? usersLoaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
+    TResult Function(List<User> users)? usersLoaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadEvent value) load,
+    required TResult Function(_UsersLoadedEvent value) usersLoaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_LoadEvent value)? load,
+    TResult Function(_UsersLoadedEvent value)? usersLoaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadEvent value)? load,
+    TResult Function(_UsersLoadedEvent value)? usersLoaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -116,6 +128,7 @@ class _$_LoadEvent implements _LoadEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() load,
+    required TResult Function(List<User> users) usersLoaded,
   }) {
     return load();
   }
@@ -124,6 +137,7 @@ class _$_LoadEvent implements _LoadEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? load,
+    TResult Function(List<User> users)? usersLoaded,
   }) {
     return load?.call();
   }
@@ -132,6 +146,7 @@ class _$_LoadEvent implements _LoadEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
+    TResult Function(List<User> users)? usersLoaded,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -144,6 +159,7 @@ class _$_LoadEvent implements _LoadEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadEvent value) load,
+    required TResult Function(_UsersLoadedEvent value) usersLoaded,
   }) {
     return load(this);
   }
@@ -152,6 +168,7 @@ class _$_LoadEvent implements _LoadEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_LoadEvent value)? load,
+    TResult Function(_UsersLoadedEvent value)? usersLoaded,
   }) {
     return load?.call(this);
   }
@@ -160,6 +177,7 @@ class _$_LoadEvent implements _LoadEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadEvent value)? load,
+    TResult Function(_UsersLoadedEvent value)? usersLoaded,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -174,17 +192,151 @@ abstract class _LoadEvent implements HomeEvent {
 }
 
 /// @nodoc
+abstract class _$UsersLoadedEventCopyWith<$Res> {
+  factory _$UsersLoadedEventCopyWith(
+          _UsersLoadedEvent value, $Res Function(_UsersLoadedEvent) then) =
+      __$UsersLoadedEventCopyWithImpl<$Res>;
+  $Res call({List<User> users});
+}
+
+/// @nodoc
+class __$UsersLoadedEventCopyWithImpl<$Res>
+    extends _$HomeEventCopyWithImpl<$Res>
+    implements _$UsersLoadedEventCopyWith<$Res> {
+  __$UsersLoadedEventCopyWithImpl(
+      _UsersLoadedEvent _value, $Res Function(_UsersLoadedEvent) _then)
+      : super(_value, (v) => _then(v as _UsersLoadedEvent));
+
+  @override
+  _UsersLoadedEvent get _value => super._value as _UsersLoadedEvent;
+
+  @override
+  $Res call({
+    Object? users = freezed,
+  }) {
+    return _then(_UsersLoadedEvent(
+      users == freezed
+          ? _value.users
+          : users // ignore: cast_nullable_to_non_nullable
+              as List<User>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_UsersLoadedEvent implements _UsersLoadedEvent {
+  const _$_UsersLoadedEvent(this.users);
+
+  @override
+  final List<User> users;
+
+  @override
+  String toString() {
+    return 'HomeEvent.usersLoaded(users: $users)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _UsersLoadedEvent &&
+            const DeepCollectionEquality().equals(other.users, users));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(users));
+
+  @JsonKey(ignore: true)
+  @override
+  _$UsersLoadedEventCopyWith<_UsersLoadedEvent> get copyWith =>
+      __$UsersLoadedEventCopyWithImpl<_UsersLoadedEvent>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() load,
+    required TResult Function(List<User> users) usersLoaded,
+  }) {
+    return usersLoaded(users);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? load,
+    TResult Function(List<User> users)? usersLoaded,
+  }) {
+    return usersLoaded?.call(users);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? load,
+    TResult Function(List<User> users)? usersLoaded,
+    required TResult orElse(),
+  }) {
+    if (usersLoaded != null) {
+      return usersLoaded(users);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadEvent value) load,
+    required TResult Function(_UsersLoadedEvent value) usersLoaded,
+  }) {
+    return usersLoaded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_LoadEvent value)? load,
+    TResult Function(_UsersLoadedEvent value)? usersLoaded,
+  }) {
+    return usersLoaded?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadEvent value)? load,
+    TResult Function(_UsersLoadedEvent value)? usersLoaded,
+    required TResult orElse(),
+  }) {
+    if (usersLoaded != null) {
+      return usersLoaded(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UsersLoadedEvent implements HomeEvent {
+  const factory _UsersLoadedEvent(List<User> users) = _$_UsersLoadedEvent;
+
+  List<User> get users;
+  @JsonKey(ignore: true)
+  _$UsersLoadedEventCopyWith<_UsersLoadedEvent> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 class _$HomeStateTearOff {
   const _$HomeStateTearOff();
 
   _HomeState call(
-      {required HomeBottomTab tab,
-      required List<User> users,
-      required bool isLoading}) {
+      {required List<User> users,
+      required bool isLoading,
+      required int viewIndex}) {
     return _HomeState(
-      tab: tab,
       users: users,
       isLoading: isLoading,
+      viewIndex: viewIndex,
     );
   }
 }
@@ -194,9 +346,9 @@ const $HomeState = _$HomeStateTearOff();
 
 /// @nodoc
 mixin _$HomeState {
-  HomeBottomTab get tab => throw _privateConstructorUsedError;
   List<User> get users => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  int get viewIndex => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeStateCopyWith<HomeState> get copyWith =>
@@ -207,7 +359,7 @@ mixin _$HomeState {
 abstract class $HomeStateCopyWith<$Res> {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
       _$HomeStateCopyWithImpl<$Res>;
-  $Res call({HomeBottomTab tab, List<User> users, bool isLoading});
+  $Res call({List<User> users, bool isLoading, int viewIndex});
 }
 
 /// @nodoc
@@ -220,15 +372,11 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? tab = freezed,
     Object? users = freezed,
     Object? isLoading = freezed,
+    Object? viewIndex = freezed,
   }) {
     return _then(_value.copyWith(
-      tab: tab == freezed
-          ? _value.tab
-          : tab // ignore: cast_nullable_to_non_nullable
-              as HomeBottomTab,
       users: users == freezed
           ? _value.users
           : users // ignore: cast_nullable_to_non_nullable
@@ -237,6 +385,10 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      viewIndex: viewIndex == freezed
+          ? _value.viewIndex
+          : viewIndex // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -247,7 +399,7 @@ abstract class _$HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
           _HomeState value, $Res Function(_HomeState) then) =
       __$HomeStateCopyWithImpl<$Res>;
   @override
-  $Res call({HomeBottomTab tab, List<User> users, bool isLoading});
+  $Res call({List<User> users, bool isLoading, int viewIndex});
 }
 
 /// @nodoc
@@ -261,15 +413,11 @@ class __$HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? tab = freezed,
     Object? users = freezed,
     Object? isLoading = freezed,
+    Object? viewIndex = freezed,
   }) {
     return _then(_HomeState(
-      tab: tab == freezed
-          ? _value.tab
-          : tab // ignore: cast_nullable_to_non_nullable
-              as HomeBottomTab,
       users: users == freezed
           ? _value.users
           : users // ignore: cast_nullable_to_non_nullable
@@ -278,6 +426,10 @@ class __$HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      viewIndex: viewIndex == freezed
+          ? _value.viewIndex
+          : viewIndex // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -286,18 +438,18 @@ class __$HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
 
 class _$_HomeState implements _HomeState {
   const _$_HomeState(
-      {required this.tab, required this.users, required this.isLoading});
+      {required this.users, required this.isLoading, required this.viewIndex});
 
-  @override
-  final HomeBottomTab tab;
   @override
   final List<User> users;
   @override
   final bool isLoading;
+  @override
+  final int viewIndex;
 
   @override
   String toString() {
-    return 'HomeState(tab: $tab, users: $users, isLoading: $isLoading)';
+    return 'HomeState(users: $users, isLoading: $isLoading, viewIndex: $viewIndex)';
   }
 
   @override
@@ -305,17 +457,17 @@ class _$_HomeState implements _HomeState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _HomeState &&
-            const DeepCollectionEquality().equals(other.tab, tab) &&
             const DeepCollectionEquality().equals(other.users, users) &&
-            const DeepCollectionEquality().equals(other.isLoading, isLoading));
+            const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
+            const DeepCollectionEquality().equals(other.viewIndex, viewIndex));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(tab),
       const DeepCollectionEquality().hash(users),
-      const DeepCollectionEquality().hash(isLoading));
+      const DeepCollectionEquality().hash(isLoading),
+      const DeepCollectionEquality().hash(viewIndex));
 
   @JsonKey(ignore: true)
   @override
@@ -325,16 +477,16 @@ class _$_HomeState implements _HomeState {
 
 abstract class _HomeState implements HomeState {
   const factory _HomeState(
-      {required HomeBottomTab tab,
-      required List<User> users,
-      required bool isLoading}) = _$_HomeState;
+      {required List<User> users,
+      required bool isLoading,
+      required int viewIndex}) = _$_HomeState;
 
-  @override
-  HomeBottomTab get tab;
   @override
   List<User> get users;
   @override
   bool get isLoading;
+  @override
+  int get viewIndex;
   @override
   @JsonKey(ignore: true)
   _$HomeStateCopyWith<_HomeState> get copyWith =>
