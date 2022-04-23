@@ -62,8 +62,8 @@ class ProfileCard extends StatelessWidget {
 /// Action Button Group
 ///
 class _ActionButtonGroup extends StatelessWidget {
-  const _ActionButtonGroup({Key? key, this.onNope, this.onLike}) : super(key: key);
-  final VoidCallback? onNope;
+  const _ActionButtonGroup({Key? key, this.onPass, this.onLike}) : super(key: key);
+  final VoidCallback? onPass;
   final VoidCallback? onLike;
 
   @override
@@ -71,7 +71,7 @@ class _ActionButtonGroup extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _ActionButton(text: 'Nope', onPressed: onNope, icon: Icons.close, iconColor: Colors.yellow),
+        _ActionButton(text: 'Pass', onPressed: onPass, icon: Icons.close, iconColor: Colors.yellow),
         const SizedBox(width: 16),
         _ActionButton(
           text: 'Like',
@@ -102,6 +102,7 @@ class _ActionButton extends StatelessWidget {
     return Column(
       children: [
         FloatingActionButton(
+          heroTag: text,
           onPressed: onPressed,
           child: Icon(icon, color: iconColor),
           backgroundColor: Colors.white,

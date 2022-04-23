@@ -38,6 +38,6 @@ Map<String, dynamic> _$$_UserEntityToJson(_$_UserEntity instance) =>
 
 const _$UserActionStateEnumMap = {
   UserActionState.none: 'none',
-  UserActionState.nope: 'nope',
+  UserActionState.passed: 'passed',
   UserActionState.liked: 'liked',
 };

@@ -7,9 +7,13 @@ abstract class UserDao {
 
   Future<void> insertOrUpdate(UserEntity entity);
 
+  Future<void> updateAction(String userId, UserActionState actionState);
+
   Future<void> clearAndInsertUsers(List<UserEntity> entities);
 
   Stream<List<UserEntity>> usersStream();
+
+  Future<List<UserEntity>> getUsersByAction(UserActionState actionState);
 
   Future<void> clearTable();
 }
@@ -38,4 +42,14 @@ class _UserDaoImpl extends BaseSembastDao<UserEntity> implements UserDao {
 
   @override
   Future<void> clearTable() => clearAll();
+
+  @override
+  Future<void> updateAction(String userId, UserActionState actionState) async {
+    await update(finder: Finder(filter: Filter.equals("id", userId)), value: {"action_state": actionState.name});
+  }
+
+  @override
+  Future<List<UserEntity>> getUsersByAction(UserActionState actionState) async {
+    return getAll(finder: Finder(filter: Filter.equals("action_state", actionState.name)));
+  }
 }

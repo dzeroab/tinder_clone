@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:tinder/data/data.dart';
+import 'package:tinder/ui/users/user_list_bloc.dart';
 
 import '../domain/domain.dart';
 import '../ui/home_bloc.dart';

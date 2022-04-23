@@ -31,7 +31,7 @@ class _CardAnimationControllerImpl implements CardAnimationController {
 
   @override
   void initialize(TickerProvider vsync, VoidCallback onDone) {
-    controller = AnimationController(duration: const Duration(milliseconds: 1000), vsync: vsync);
+    controller = AnimationController(duration: const Duration(milliseconds: 600), vsync: vsync);
 
     controller.addListener(() {
       if (controller.isCompleted) {

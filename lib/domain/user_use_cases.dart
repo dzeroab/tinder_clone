@@ -71,3 +71,27 @@ class LoadUserDetailCommand {
     await _database.userDao.insertOrUpdate(entity);
   }
 }
+
+//
+class UpdateUserActionCommand {
+  final AppDatabase _database;
+
+  UpdateUserActionCommand(this._database);
+
+  Future<void> call(String userId, UserActionState actionState) async {
+    await _database.userDao.updateAction(userId, actionState);
+  }
+}
+
+class GetUserListByActionQuery {
+  final AppDatabase _database;
+
+  GetUserListByActionQuery(this._database);
+
+  Future<List<User>> call(UserActionState actionState) => _database //
+      .userDao
+      .getUsersByAction(actionState)
+      .then(
+        (users) => users.map((e) => e.mapToUser()).toList(),
+      );
+}

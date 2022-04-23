@@ -32,6 +32,6 @@ class UserEntityConverter implements JsonConverter<UserEntity, Map<String, dynam
 
 enum UserActionState {
   none,
-  nope,
+  passed,
   liked,
 }

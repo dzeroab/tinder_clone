@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:tinder/data/database/entities/entities.dart';
 import 'package:tinder/domain/domain.dart';
 
 part 'home_bloc.freezed.dart';
@@ -13,12 +14,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final SyncUsersCommand _syncUsersCommand;
   final GetUserListQuery _getUserListQuery;
   final LoadUserDetailCommand _loadUserDetailCommand;
+  final UpdateUserActionCommand _updateUserActionCommand;
   final CompositeSubscription _compositeSubscription = CompositeSubscription();
 
   HomeBloc(
     this._syncUsersCommand,
     this._getUserListQuery,
     this._loadUserDetailCommand,
+    this._updateUserActionCommand,
   ) : super(HomeState.initial()) {
     on<_LoadEvent>(_loadEvent);
     on<_UsersLoadedEvent>(_usersLoadedEvent);
@@ -27,7 +30,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   void load() => add(const HomeEvent.load());
 
-  void next() => add(HomeEvent.updateViewIndex(state.viewIndex + 1));
+  void next(UserActionState actionState) async {
+    //
+    if (state.viewIndex >= 0 && state.viewIndex < state.users.length) {
+      _updateUserActionCommand(state.users[state.viewIndex].id, actionState).then((value) {});
+    }
+
+    add(HomeEvent.updateViewIndex(state.viewIndex + 1));
+  }
 
   @override
   Future<void> close() async {

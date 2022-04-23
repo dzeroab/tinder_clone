@@ -5,5 +5,10 @@ Future<void> blocModule(GetIt getIt) async {
         getIt(),
         getIt(),
         getIt(),
+        getIt(),
+      ));
+
+  getIt.registerFactory(() => UserListBloc(
+        getIt(),
       ));
 }

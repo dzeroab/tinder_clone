@@ -6,10 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
+import 'package:tinder/data/data.dart';
 import 'package:tinder/domain/domain.dart';
 
 import 'card_animation_controller.dart';
 import 'home_bloc.dart';
+import 'users/user_list_screen.dart';
 
 part 'widgets.dart';
 
@@ -32,7 +34,14 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     _bloc.load();
 
     _cardAnimation.initialize(this, () {
-      _bloc.next();
+      switch (_direction) {
+        case SwipeDirection.startToEnd:
+          _bloc.next(UserActionState.liked);
+          break;
+        case SwipeDirection.endToStart:
+          _bloc.next(UserActionState.passed);
+          break;
+      }
     });
   }
 
@@ -43,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     super.dispose();
   }
 
-  void _onNope() {
+  void _onPass() {
     _direction = SwipeDirection.endToStart;
     _cardAnimation.controller.forward();
   }
@@ -94,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
                             ///
                             Positioned(
-                              child: _ActionButtonGroup(onLike: _onLike, onNope: _onNope),
+                              child: _ActionButtonGroup(onLike: _onLike, onPass: _onPass),
                               left: 0,
                               right: 0,
                               bottom: 0,
@@ -104,7 +113,40 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                       },
                     ),
                   ),
-                  const SizedBox(height: 20),
+
+                  ///
+                  Container(
+                    height: 60,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const UserListScreen(actionState: UserActionState.passed)));
+                            },
+                            child: Container(
+                              child: const Text("Passed List"),
+                              height: 60,
+                              alignment: Alignment.center,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                            child: InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const UserListScreen(actionState: UserActionState.liked)));
+                          },
+                          child: Container(
+                            child: const Text("Linked List", style: TextStyle(color: Colors.red)),
+                            height: 60,
+                            alignment: Alignment.center,
+                          ),
+                        )),
+                      ],
+                    ),
+                  )
                 ],
               ),
             );
