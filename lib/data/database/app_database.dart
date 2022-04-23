@@ -1,5 +1,7 @@
 part of 'database.dart';
 
 class AppDatabase {
-  AppDatabase();
+  final UserDao userDao;
+
+  AppDatabase(this.userDao);
 }

@@ -2,6 +2,8 @@ library data.database;
 
 import 'package:get_it/get_it.dart';
 
+import 'dao/dao.dart';
+
 export 'core/core.dart';
 export 'entities/entities.dart';
 export 'dao/dao.dart';

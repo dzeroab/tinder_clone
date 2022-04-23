@@ -177,8 +177,15 @@ abstract class _LoadEvent implements HomeEvent {
 class _$HomeStateTearOff {
   const _$HomeStateTearOff();
 
-  _HomeState call() {
-    return const _HomeState();
+  _HomeState call(
+      {required HomeBottomTab tab,
+      required List<User> users,
+      required bool isLoading}) {
+    return _HomeState(
+      tab: tab,
+      users: users,
+      isLoading: isLoading,
+    );
   }
 }
 
@@ -186,12 +193,21 @@ class _$HomeStateTearOff {
 const $HomeState = _$HomeStateTearOff();
 
 /// @nodoc
-mixin _$HomeState {}
+mixin _$HomeState {
+  HomeBottomTab get tab => throw _privateConstructorUsedError;
+  List<User> get users => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $HomeStateCopyWith<HomeState> get copyWith =>
+      throw _privateConstructorUsedError;
+}
 
 /// @nodoc
 abstract class $HomeStateCopyWith<$Res> {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
       _$HomeStateCopyWithImpl<$Res>;
+  $Res call({HomeBottomTab tab, List<User> users, bool isLoading});
 }
 
 /// @nodoc
@@ -201,13 +217,37 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
   final HomeState _value;
   // ignore: unused_field
   final $Res Function(HomeState) _then;
+
+  @override
+  $Res call({
+    Object? tab = freezed,
+    Object? users = freezed,
+    Object? isLoading = freezed,
+  }) {
+    return _then(_value.copyWith(
+      tab: tab == freezed
+          ? _value.tab
+          : tab // ignore: cast_nullable_to_non_nullable
+              as HomeBottomTab,
+      users: users == freezed
+          ? _value.users
+          : users // ignore: cast_nullable_to_non_nullable
+              as List<User>,
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
-abstract class _$HomeStateCopyWith<$Res> {
+abstract class _$HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
   factory _$HomeStateCopyWith(
           _HomeState value, $Res Function(_HomeState) then) =
       __$HomeStateCopyWithImpl<$Res>;
+  @override
+  $Res call({HomeBottomTab tab, List<User> users, bool isLoading});
 }
 
 /// @nodoc
@@ -218,28 +258,85 @@ class __$HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
 
   @override
   _HomeState get _value => super._value as _HomeState;
+
+  @override
+  $Res call({
+    Object? tab = freezed,
+    Object? users = freezed,
+    Object? isLoading = freezed,
+  }) {
+    return _then(_HomeState(
+      tab: tab == freezed
+          ? _value.tab
+          : tab // ignore: cast_nullable_to_non_nullable
+              as HomeBottomTab,
+      users: users == freezed
+          ? _value.users
+          : users // ignore: cast_nullable_to_non_nullable
+              as List<User>,
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_HomeState implements _HomeState {
-  const _$_HomeState();
+  const _$_HomeState(
+      {required this.tab, required this.users, required this.isLoading});
+
+  @override
+  final HomeBottomTab tab;
+  @override
+  final List<User> users;
+  @override
+  final bool isLoading;
 
   @override
   String toString() {
-    return 'HomeState()';
+    return 'HomeState(tab: $tab, users: $users, isLoading: $isLoading)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _HomeState);
+        (other.runtimeType == runtimeType &&
+            other is _HomeState &&
+            const DeepCollectionEquality().equals(other.tab, tab) &&
+            const DeepCollectionEquality().equals(other.users, users) &&
+            const DeepCollectionEquality().equals(other.isLoading, isLoading));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(tab),
+      const DeepCollectionEquality().hash(users),
+      const DeepCollectionEquality().hash(isLoading));
+
+  @JsonKey(ignore: true)
+  @override
+  _$HomeStateCopyWith<_HomeState> get copyWith =>
+      __$HomeStateCopyWithImpl<_HomeState>(this, _$identity);
 }
 
 abstract class _HomeState implements HomeState {
-  const factory _HomeState() = _$_HomeState;
+  const factory _HomeState(
+      {required HomeBottomTab tab,
+      required List<User> users,
+      required bool isLoading}) = _$_HomeState;
+
+  @override
+  HomeBottomTab get tab;
+  @override
+  List<User> get users;
+  @override
+  bool get isLoading;
+  @override
+  @JsonKey(ignore: true)
+  _$HomeStateCopyWith<_HomeState> get copyWith =>
+      throw _privateConstructorUsedError;
 }

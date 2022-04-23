@@ -5,6 +5,8 @@ import 'package:get_it/get_it.dart';
 
 import 'home_bloc.dart';
 
+part 'widgets.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -29,6 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      bottomNavigationBar: HomeBottomBar(),
+    );
   }
 }
