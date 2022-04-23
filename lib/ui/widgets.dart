@@ -1,5 +1,6 @@
 part of 'home_screen.dart';
 
+/// Dummy Search view
 class _SearchView extends StatelessWidget {
   const _SearchView({Key? key}) : super(key: key);
 
@@ -16,6 +17,8 @@ class _SearchView extends StatelessWidget {
   }
 }
 
+/// Profile card
+///
 class ProfileCard extends StatelessWidget {
   const ProfileCard({
     Key? key,
@@ -44,11 +47,23 @@ class ProfileCard extends StatelessWidget {
               fit: BoxFit.cover,
               placeholder: (context, url) => Container(color: Colors.black12),
             ),
-            Align(
-              alignment: const Alignment(-0.5, 0.7),
-              child: Text(
-                "$name $_ageText",
-                style: const TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.bold),
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: Container(
+                height: 120,
+                padding: const EdgeInsets.all(8),
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                      colors: [Colors.black12, Colors.black45],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter),
+                ),
+                child: Text(
+                  "$name $_ageText",
+                  style: const TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.bold),
+                ),
               ),
             ),
           ],
@@ -58,6 +73,7 @@ class ProfileCard extends StatelessWidget {
   }
 }
 
+///
 ///
 /// Action Button Group
 ///
