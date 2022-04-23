@@ -21,10 +21,14 @@ class ProfileCard extends StatelessWidget {
     Key? key,
     required this.name,
     required this.picture,
+    this.age,
   }) : super(key: key);
 
   final String name;
   final String picture;
+  final int? age;
+
+  String get _ageText => age != null ? "$age" : "";
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +36,22 @@ class ProfileCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(24),
-        child: CachedNetworkImage(
-          imageUrl: picture,
-          fit: BoxFit.cover,
-          placeholder: (context, url) => Container(color: Colors.black12),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            CachedNetworkImage(
+              imageUrl: picture,
+              fit: BoxFit.cover,
+              placeholder: (context, url) => Container(color: Colors.black12),
+            ),
+            Align(
+              alignment: const Alignment(-0.5, 0.7),
+              child: Text(
+                "$name $_ageText",
+                style: const TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
         ),
       ),
     );

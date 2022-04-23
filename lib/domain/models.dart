@@ -27,6 +27,14 @@ class User {
   });
 }
 
+extension UserEx on User {
+  int? get age {
+    final date = dateOfBirth != null ? DateTimeUtils.revertToUTC(dateOfBirth!) : null;
+
+    return date == null ? null : DateTime.now().difference(date).inDays ~/ 365;
+  }
+}
+
 extension UserEntityEx on UserEntity {
   User mapToUser() => User(
         id: id,

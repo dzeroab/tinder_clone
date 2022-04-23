@@ -26,6 +26,12 @@ class _$HomeEventTearOff {
       users,
     );
   }
+
+  _UpdateViewIndex updateViewIndex(int index) {
+    return _UpdateViewIndex(
+      index,
+    );
+  }
 }
 
 /// @nodoc
@@ -37,18 +43,21 @@ mixin _$HomeEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() load,
     required TResult Function(List<User> users) usersLoaded,
+    required TResult Function(int index) updateViewIndex,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? load,
     TResult Function(List<User> users)? usersLoaded,
+    TResult Function(int index)? updateViewIndex,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
     TResult Function(List<User> users)? usersLoaded,
+    TResult Function(int index)? updateViewIndex,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -56,18 +65,21 @@ mixin _$HomeEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadEvent value) load,
     required TResult Function(_UsersLoadedEvent value) usersLoaded,
+    required TResult Function(_UpdateViewIndex value) updateViewIndex,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_LoadEvent value)? load,
     TResult Function(_UsersLoadedEvent value)? usersLoaded,
+    TResult Function(_UpdateViewIndex value)? updateViewIndex,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadEvent value)? load,
     TResult Function(_UsersLoadedEvent value)? usersLoaded,
+    TResult Function(_UpdateViewIndex value)? updateViewIndex,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -129,6 +141,7 @@ class _$_LoadEvent implements _LoadEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() load,
     required TResult Function(List<User> users) usersLoaded,
+    required TResult Function(int index) updateViewIndex,
   }) {
     return load();
   }
@@ -138,6 +151,7 @@ class _$_LoadEvent implements _LoadEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? load,
     TResult Function(List<User> users)? usersLoaded,
+    TResult Function(int index)? updateViewIndex,
   }) {
     return load?.call();
   }
@@ -147,6 +161,7 @@ class _$_LoadEvent implements _LoadEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
     TResult Function(List<User> users)? usersLoaded,
+    TResult Function(int index)? updateViewIndex,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -160,6 +175,7 @@ class _$_LoadEvent implements _LoadEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadEvent value) load,
     required TResult Function(_UsersLoadedEvent value) usersLoaded,
+    required TResult Function(_UpdateViewIndex value) updateViewIndex,
   }) {
     return load(this);
   }
@@ -169,6 +185,7 @@ class _$_LoadEvent implements _LoadEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_LoadEvent value)? load,
     TResult Function(_UsersLoadedEvent value)? usersLoaded,
+    TResult Function(_UpdateViewIndex value)? updateViewIndex,
   }) {
     return load?.call(this);
   }
@@ -178,6 +195,7 @@ class _$_LoadEvent implements _LoadEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadEvent value)? load,
     TResult Function(_UsersLoadedEvent value)? usersLoaded,
+    TResult Function(_UpdateViewIndex value)? updateViewIndex,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -258,6 +276,7 @@ class _$_UsersLoadedEvent implements _UsersLoadedEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() load,
     required TResult Function(List<User> users) usersLoaded,
+    required TResult Function(int index) updateViewIndex,
   }) {
     return usersLoaded(users);
   }
@@ -267,6 +286,7 @@ class _$_UsersLoadedEvent implements _UsersLoadedEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? load,
     TResult Function(List<User> users)? usersLoaded,
+    TResult Function(int index)? updateViewIndex,
   }) {
     return usersLoaded?.call(users);
   }
@@ -276,6 +296,7 @@ class _$_UsersLoadedEvent implements _UsersLoadedEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
     TResult Function(List<User> users)? usersLoaded,
+    TResult Function(int index)? updateViewIndex,
     required TResult orElse(),
   }) {
     if (usersLoaded != null) {
@@ -289,6 +310,7 @@ class _$_UsersLoadedEvent implements _UsersLoadedEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadEvent value) load,
     required TResult Function(_UsersLoadedEvent value) usersLoaded,
+    required TResult Function(_UpdateViewIndex value) updateViewIndex,
   }) {
     return usersLoaded(this);
   }
@@ -298,6 +320,7 @@ class _$_UsersLoadedEvent implements _UsersLoadedEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_LoadEvent value)? load,
     TResult Function(_UsersLoadedEvent value)? usersLoaded,
+    TResult Function(_UpdateViewIndex value)? updateViewIndex,
   }) {
     return usersLoaded?.call(this);
   }
@@ -307,6 +330,7 @@ class _$_UsersLoadedEvent implements _UsersLoadedEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadEvent value)? load,
     TResult Function(_UsersLoadedEvent value)? usersLoaded,
+    TResult Function(_UpdateViewIndex value)? updateViewIndex,
     required TResult orElse(),
   }) {
     if (usersLoaded != null) {
@@ -322,6 +346,145 @@ abstract class _UsersLoadedEvent implements HomeEvent {
   List<User> get users;
   @JsonKey(ignore: true)
   _$UsersLoadedEventCopyWith<_UsersLoadedEvent> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$UpdateViewIndexCopyWith<$Res> {
+  factory _$UpdateViewIndexCopyWith(
+          _UpdateViewIndex value, $Res Function(_UpdateViewIndex) then) =
+      __$UpdateViewIndexCopyWithImpl<$Res>;
+  $Res call({int index});
+}
+
+/// @nodoc
+class __$UpdateViewIndexCopyWithImpl<$Res> extends _$HomeEventCopyWithImpl<$Res>
+    implements _$UpdateViewIndexCopyWith<$Res> {
+  __$UpdateViewIndexCopyWithImpl(
+      _UpdateViewIndex _value, $Res Function(_UpdateViewIndex) _then)
+      : super(_value, (v) => _then(v as _UpdateViewIndex));
+
+  @override
+  _UpdateViewIndex get _value => super._value as _UpdateViewIndex;
+
+  @override
+  $Res call({
+    Object? index = freezed,
+  }) {
+    return _then(_UpdateViewIndex(
+      index == freezed
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_UpdateViewIndex implements _UpdateViewIndex {
+  const _$_UpdateViewIndex(this.index);
+
+  @override
+  final int index;
+
+  @override
+  String toString() {
+    return 'HomeEvent.updateViewIndex(index: $index)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _UpdateViewIndex &&
+            const DeepCollectionEquality().equals(other.index, index));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(index));
+
+  @JsonKey(ignore: true)
+  @override
+  _$UpdateViewIndexCopyWith<_UpdateViewIndex> get copyWith =>
+      __$UpdateViewIndexCopyWithImpl<_UpdateViewIndex>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() load,
+    required TResult Function(List<User> users) usersLoaded,
+    required TResult Function(int index) updateViewIndex,
+  }) {
+    return updateViewIndex(index);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? load,
+    TResult Function(List<User> users)? usersLoaded,
+    TResult Function(int index)? updateViewIndex,
+  }) {
+    return updateViewIndex?.call(index);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? load,
+    TResult Function(List<User> users)? usersLoaded,
+    TResult Function(int index)? updateViewIndex,
+    required TResult orElse(),
+  }) {
+    if (updateViewIndex != null) {
+      return updateViewIndex(index);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadEvent value) load,
+    required TResult Function(_UsersLoadedEvent value) usersLoaded,
+    required TResult Function(_UpdateViewIndex value) updateViewIndex,
+  }) {
+    return updateViewIndex(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_LoadEvent value)? load,
+    TResult Function(_UsersLoadedEvent value)? usersLoaded,
+    TResult Function(_UpdateViewIndex value)? updateViewIndex,
+  }) {
+    return updateViewIndex?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadEvent value)? load,
+    TResult Function(_UsersLoadedEvent value)? usersLoaded,
+    TResult Function(_UpdateViewIndex value)? updateViewIndex,
+    required TResult orElse(),
+  }) {
+    if (updateViewIndex != null) {
+      return updateViewIndex(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateViewIndex implements HomeEvent {
+  const factory _UpdateViewIndex(int index) = _$_UpdateViewIndex;
+
+  int get index;
+  @JsonKey(ignore: true)
+  _$UpdateViewIndexCopyWith<_UpdateViewIndex> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

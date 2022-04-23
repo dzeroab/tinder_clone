@@ -27,6 +27,7 @@ class _$UserEntityTearOff {
       required String firstName,
       required String lastName,
       required String picture,
+      required UserActionState actionState,
       String? gender,
       String? email,
       String? dateOfBirth,
@@ -38,6 +39,7 @@ class _$UserEntityTearOff {
       firstName: firstName,
       lastName: lastName,
       picture: picture,
+      actionState: actionState,
       gender: gender,
       email: email,
       dateOfBirth: dateOfBirth,
@@ -61,6 +63,7 @@ mixin _$UserEntity {
   String get firstName => throw _privateConstructorUsedError;
   String get lastName => throw _privateConstructorUsedError;
   String get picture => throw _privateConstructorUsedError;
+  UserActionState get actionState => throw _privateConstructorUsedError;
   String? get gender => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   String? get dateOfBirth => throw _privateConstructorUsedError;
@@ -84,6 +87,7 @@ abstract class $UserEntityCopyWith<$Res> {
       String firstName,
       String lastName,
       String picture,
+      UserActionState actionState,
       String? gender,
       String? email,
       String? dateOfBirth,
@@ -106,6 +110,7 @@ class _$UserEntityCopyWithImpl<$Res> implements $UserEntityCopyWith<$Res> {
     Object? firstName = freezed,
     Object? lastName = freezed,
     Object? picture = freezed,
+    Object? actionState = freezed,
     Object? gender = freezed,
     Object? email = freezed,
     Object? dateOfBirth = freezed,
@@ -133,6 +138,10 @@ class _$UserEntityCopyWithImpl<$Res> implements $UserEntityCopyWith<$Res> {
           ? _value.picture
           : picture // ignore: cast_nullable_to_non_nullable
               as String,
+      actionState: actionState == freezed
+          ? _value.actionState
+          : actionState // ignore: cast_nullable_to_non_nullable
+              as UserActionState,
       gender: gender == freezed
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
@@ -169,6 +178,7 @@ abstract class _$UserEntityCopyWith<$Res> implements $UserEntityCopyWith<$Res> {
       String firstName,
       String lastName,
       String picture,
+      UserActionState actionState,
       String? gender,
       String? email,
       String? dateOfBirth,
@@ -193,6 +203,7 @@ class __$UserEntityCopyWithImpl<$Res> extends _$UserEntityCopyWithImpl<$Res>
     Object? firstName = freezed,
     Object? lastName = freezed,
     Object? picture = freezed,
+    Object? actionState = freezed,
     Object? gender = freezed,
     Object? email = freezed,
     Object? dateOfBirth = freezed,
@@ -220,6 +231,10 @@ class __$UserEntityCopyWithImpl<$Res> extends _$UserEntityCopyWithImpl<$Res>
           ? _value.picture
           : picture // ignore: cast_nullable_to_non_nullable
               as String,
+      actionState: actionState == freezed
+          ? _value.actionState
+          : actionState // ignore: cast_nullable_to_non_nullable
+              as UserActionState,
       gender: gender == freezed
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
@@ -254,6 +269,7 @@ class _$_UserEntity implements _UserEntity {
       required this.firstName,
       required this.lastName,
       required this.picture,
+      required this.actionState,
       this.gender,
       this.email,
       this.dateOfBirth,
@@ -274,6 +290,8 @@ class _$_UserEntity implements _UserEntity {
   @override
   final String picture;
   @override
+  final UserActionState actionState;
+  @override
   final String? gender;
   @override
   final String? email;
@@ -286,7 +304,7 @@ class _$_UserEntity implements _UserEntity {
 
   @override
   String toString() {
-    return 'UserEntity(id: $id, title: $title, firstName: $firstName, lastName: $lastName, picture: $picture, gender: $gender, email: $email, dateOfBirth: $dateOfBirth, registerDate: $registerDate, phone: $phone)';
+    return 'UserEntity(id: $id, title: $title, firstName: $firstName, lastName: $lastName, picture: $picture, actionState: $actionState, gender: $gender, email: $email, dateOfBirth: $dateOfBirth, registerDate: $registerDate, phone: $phone)';
   }
 
   @override
@@ -299,6 +317,8 @@ class _$_UserEntity implements _UserEntity {
             const DeepCollectionEquality().equals(other.firstName, firstName) &&
             const DeepCollectionEquality().equals(other.lastName, lastName) &&
             const DeepCollectionEquality().equals(other.picture, picture) &&
+            const DeepCollectionEquality()
+                .equals(other.actionState, actionState) &&
             const DeepCollectionEquality().equals(other.gender, gender) &&
             const DeepCollectionEquality().equals(other.email, email) &&
             const DeepCollectionEquality()
@@ -316,6 +336,7 @@ class _$_UserEntity implements _UserEntity {
       const DeepCollectionEquality().hash(firstName),
       const DeepCollectionEquality().hash(lastName),
       const DeepCollectionEquality().hash(picture),
+      const DeepCollectionEquality().hash(actionState),
       const DeepCollectionEquality().hash(gender),
       const DeepCollectionEquality().hash(email),
       const DeepCollectionEquality().hash(dateOfBirth),
@@ -340,6 +361,7 @@ abstract class _UserEntity implements UserEntity {
       required String firstName,
       required String lastName,
       required String picture,
+      required UserActionState actionState,
       String? gender,
       String? email,
       String? dateOfBirth,
@@ -359,6 +381,8 @@ abstract class _UserEntity implements UserEntity {
   String get lastName;
   @override
   String get picture;
+  @override
+  UserActionState get actionState;
   @override
   String? get gender;
   @override

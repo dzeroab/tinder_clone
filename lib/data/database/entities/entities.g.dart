@@ -13,6 +13,7 @@ _$_UserEntity _$$_UserEntityFromJson(Map<String, dynamic> json) =>
       firstName: json['first_name'] as String,
       lastName: json['last_name'] as String,
       picture: json['picture'] as String,
+      actionState: $enumDecode(_$UserActionStateEnumMap, json['action_state']),
       gender: json['gender'] as String?,
       email: json['email'] as String?,
       dateOfBirth: json['date_of_birth'] as String?,
@@ -27,9 +28,16 @@ Map<String, dynamic> _$$_UserEntityToJson(_$_UserEntity instance) =>
       'first_name': instance.firstName,
       'last_name': instance.lastName,
       'picture': instance.picture,
+      'action_state': _$UserActionStateEnumMap[instance.actionState],
       'gender': instance.gender,
       'email': instance.email,
       'date_of_birth': instance.dateOfBirth,
       'register_date': instance.registerDate,
       'phone': instance.phone,
     };
+
+const _$UserActionStateEnumMap = {
+  UserActionState.none: 'none',
+  UserActionState.nope: 'nope',
+  UserActionState.liked: 'liked',
+};

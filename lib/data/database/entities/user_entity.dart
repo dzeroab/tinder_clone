@@ -9,6 +9,7 @@ class UserEntity with _$UserEntity {
     required String firstName,
     required String lastName,
     required String picture,
+    required UserActionState actionState,
     String? gender,
     String? email,
     String? dateOfBirth,
@@ -27,4 +28,10 @@ class UserEntityConverter implements JsonConverter<UserEntity, Map<String, dynam
 
   @override
   Map<String, dynamic> toJson(UserEntity object) => object.toJson();
+}
+
+enum UserActionState {
+  none,
+  nope,
+  liked,
 }

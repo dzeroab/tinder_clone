@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
+import 'package:tinder/domain/domain.dart';
 
 import 'home_bloc.dart';
 
@@ -59,6 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: ProfileCard(
                             name: "${user.firstName} ${user.lastName}",
                             picture: user.picture,
+                            age: user.age,
                           ),
                           top: 0,
                           left: 0,
@@ -69,8 +71,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         ///
                         Positioned(
                           child: _ActionButtonGroup(
-                            onLike: () {},
-                            onNope: () {},
+                            onLike: _bloc.next,
+                            onNope: _bloc.next,
                           ),
                           left: 0,
                           right: 0,

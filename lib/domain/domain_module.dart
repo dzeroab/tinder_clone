@@ -9,4 +9,8 @@ Future<void> domainModule(GetIt getIt) async {
   getIt.registerFactory(() => GetUserListQuery(
         getIt(),
       ));
+  getIt.registerFactory(() => LoadUserDetailCommand(
+        getIt(),
+        getIt(),
+      ));
 }

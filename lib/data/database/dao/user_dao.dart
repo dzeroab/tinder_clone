@@ -3,6 +3,8 @@ part of 'dao.dart';
 abstract class UserDao {
   factory UserDao() => _UserDaoImpl();
 
+  Future<UserEntity?> getUser(String id);
+
   Future<void> insertOrUpdate(UserEntity entity);
 
   Future<void> clearAndInsertUsers(List<UserEntity> entities);
@@ -15,6 +17,9 @@ abstract class UserDao {
 /// WordDao implementation
 class _UserDaoImpl extends BaseSembastDao<UserEntity> implements UserDao {
   _UserDaoImpl() : super(converter: const UserEntityConverter(), storeName: 'users');
+
+  @override
+  Future<UserEntity?> getUser(String id) => singleOrNull(finder: Finder(filter: Filter.equals("id", id)));
 
   @override
   Future<void> insertOrUpdate(UserEntity entity) async {

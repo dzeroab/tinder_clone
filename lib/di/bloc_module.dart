@@ -4,5 +4,6 @@ Future<void> blocModule(GetIt getIt) async {
   getIt.registerFactory(() => HomeBloc(
         getIt(),
         getIt(),
+        getIt(),
       ));
 }
