@@ -19,4 +19,6 @@ Future<void> networkModule(GetIt getIt, ApiConfig config) async {
         getIt(),
         getIt(),
       ));
+
+  getIt.registerLazySingleton(() => UserApi(getIt()));
 }
