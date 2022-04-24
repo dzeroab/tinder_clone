@@ -24,12 +24,16 @@ class ProfileCard extends StatelessWidget {
     Key? key,
     required this.name,
     required this.picture,
+    required this.cardAnimationController,
+    this.showRemark = false,
     this.age,
   }) : super(key: key);
 
   final String name;
   final String picture;
   final int? age;
+  final bool showRemark;
+  final CardAnimationController cardAnimationController;
 
   String get _ageText => age != null ? "$age" : "";
 
@@ -52,7 +56,7 @@ class ProfileCard extends StatelessWidget {
               right: 0,
               bottom: 0,
               child: Container(
-                height: 120,
+                height: 140,
                 padding: const EdgeInsets.all(8),
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
@@ -66,8 +70,54 @@ class ProfileCard extends StatelessWidget {
                 ),
               ),
             ),
+            if (showRemark)
+              Positioned(
+                bottom: 40,
+                left: 24,
+                right: 24,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Opacity(
+                        opacity: cardAnimationController.getRemarkVisible(UserEmotionAction.like),
+                        child: const _ActionRemarkView(action: UserEmotionAction.like),
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Opacity(
+                        opacity: cardAnimationController.getRemarkVisible(UserEmotionAction.pass),
+                        child: const _ActionRemarkView(action: UserEmotionAction.pass),
+                      ),
+                    ),
+                  ],
+                ),
+              )
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _ActionRemarkView extends StatelessWidget {
+  const _ActionRemarkView({Key? key, required this.action}) : super(key: key);
+
+  final UserEmotionAction action;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 48,
+      decoration:
+          BoxDecoration(borderRadius: BorderRadius.circular(8), border: Border.all(color: action.color, width: 3)),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(action.icon, color: action.color),
+          const SizedBox(width: 4),
+          Text(action.text, style: TextStyle(fontSize: 24, color: action.color)),
+        ],
       ),
     );
   }

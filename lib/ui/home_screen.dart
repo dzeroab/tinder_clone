@@ -183,9 +183,11 @@ class _PositionProfileCard extends StatelessWidget {
       child: Transform.rotate(
         angle: rotateAngle,
         child: ProfileCard(
+          cardAnimationController: cardAnimationController,
           name: "${user.firstName} ${user.lastName}",
           picture: user.picture,
           age: user.age,
+          showRemark: index == 0,
         ),
       ),
       top: 0,
