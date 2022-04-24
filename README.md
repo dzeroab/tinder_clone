@@ -1,16 +1,21 @@
-# tinder
+# Tinder
 
-A new Flutter project.
+A Tinder Clone Flutter project.
 
-## Getting Started
+## Requirements
 
-This project is a starting point for a Flutter application.
+- [X] I can see one person at a time to Like or Pass
+- [X] I can check the list of people I have liked or passed so far
+- [X] I can see a person's age in addition to their name and photo (note: age is not in the user list API call)
+- [X] UI/UX: it should feel fast to swipe between people
+    - [X] I can see the next person fast thanks to the user list API (without being blocked by liking/passing a person)
+    - [X] I can see the current person's age thanks to the additional user detail. It's OK that the age takes time to
+e      display after name and photo.
 
-A few resources to get you started if this is your first Flutter project:
+## Architecture
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- The app uses the clean architecture: UI layer, domain layer and data layer. 
+  - Domain: contains all user cases which uses by the bloc
+  - Data layer: contains the network and database 
+- Data flow: The source of truth of the app is the local database. Firstly, we load the data from network, and save to 
+  local database.UI layer will listen/fetch the data from the database and display to UI
